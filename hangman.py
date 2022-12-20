@@ -8,15 +8,15 @@ def get_valid_word(words):
         word = choice(words)
     return word.lower()
 
-print("we are going to play a hangman. Best of Luck! :)")
 answer = list(get_valid_word(words))
-
+ans = "".join(answer)
+print("we are going to play a hangman.You have 7 lives.\nEvery time you guess a wrong letter you lose a live.\n Best of Luck! :)")
 temp = ["_" for char in answer]
 used_char = []
 
-    
+ 
 def hangman():
-    chances = 15
+    chances = 7
     while chances:
         print(" ".join(temp))  # displaying
         guess = input("Enter a letter:")
@@ -28,7 +28,7 @@ def hangman():
                 continue
         used_char.append(guess)
 
-        if len(guess) != 1 or not len(guess):
+        if len(guess) != 1:#checking for invalid input
             print("Please enter one letter at a time.")
             continue
         # checking for matching letters
@@ -47,16 +47,21 @@ def hangman():
                         temp.pop(new_index)
                         temp.insert(new_index, char)
                         index = new_index
-        chances -= 1
-
-        ans = "".join(answer)
+        i = len(answer) - 1
+        while i>=0:
+            if answer[i]==guess:
+                break
+            elif answer[i]!= guess and i==0:
+                chances -= 1
+            i=i-1
+        
         if temp == answer:
             print(f"the word is '{ans}'.\nYou guessed it right.you win.")
             break
         if not chances:
-            print(f"0 guesses left.\n You lose.\n the word was '{ans}'")
-
-        print(f"You have {chances} guesses left")
+            print(f"0 lives left.\n You lose.\n the word was '{ans}'")
+        else:
+            print(f"You have {chances} lives left")
 
 
 if __name__ == "__main__":
