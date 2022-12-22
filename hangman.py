@@ -10,7 +10,7 @@ def get_valid_word(words):
 
 answer = list(get_valid_word(words))
 ans = "".join(answer)
-print("we are going to play a hangman.You have 7 lives.\nEvery time you guess a wrong letter you lose a live.\n Best of Luck! :)")
+print("we are going to play hangman.You have 7 lives.\nEvery time you guess a wrong letter you lose a live.\n Best of Luck! :)")
 temp = ["_" for char in answer]
 used_char = []
 
